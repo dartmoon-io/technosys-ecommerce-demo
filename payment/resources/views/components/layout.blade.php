@@ -16,7 +16,7 @@
         @vite('resources/js/app.js')
     </head>
     <body class="antialiased">
-        <div {{ $attributes->merge(['class' => 'w-full min-h-screen bg-primary']) }}>
+        <div {{ $attributes->merge(['class' => 'w-full min-h-screen bg-primary py-10']) }}>
             {{ $slot }}
         </div>
     </body>
