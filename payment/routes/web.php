@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+/**
+ * Payment summary
+ */
+Route::get('summary', function () {
+    return view('payment-summary');
+});

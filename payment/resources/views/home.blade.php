@@ -44,14 +44,15 @@
                         </x-input-group>
                     </x-form.row>
                     <x-form.row>
-                        <x-button class="w-full py-3 text-center rounded-[0.303rem] border border-transparent bg-primary hover:text-primary hover:bg-transparent hover:border-primary">
+                        <x-button.primary class="w-full">
                             {{ __('Prosegui') }}
-                        </x-button>
+                        </x-button.primary>
                     </x-form.row>
                 </x-form>
+                <p class="mt-3 text-light-gray text-xs text-center">Merchant country: Italy</p>
             </x-card>
             <x-form>
-                <x-button class="w-full border p-3 rounded-[0.303rem] border-transparent hover:border-white">
+                <x-button class="w-full border p-2 rounded-[0.303rem] border-transparent hover:border-white">
                     {{ __('Annulla operazione') }}
                 </x-button>
             </x-form>
