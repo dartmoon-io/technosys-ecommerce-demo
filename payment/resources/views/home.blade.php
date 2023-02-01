@@ -2,7 +2,7 @@
     <div class="container flex flex-wrap gap-10 md:gap-0">
         <div class="flex flex-col items-center justify-center w-full md:w-1/2">
             <h3 class="mb-5 font-black text-white text-center">PAYMENT SYSTEM DEMO</h3>
-            <x-card class="mb-3 py-5 px-3 w-[22.5rem]">
+            <x-card class="mb-3 py-5 px-3 w-[20.625rem] md:w-[22.5rem]">
                 <h2 class="mb-2 font-bold text-black text-center text-4xl tracking-wide">20,00 €</h2>
                 <span class="block text-black text-center">Ordine</span>
                 <p class="mb-3 font-bold text-black text-center">ABCDEFGHIJKLMN</p>
@@ -16,7 +16,7 @@
                             <x-input type="text" name="card_number" placeholder="0000 0000 0000 0000" required />
                         </x-input-group>
                     </x-form.row>
-                    <x-form.row class="mb-3">
+                    <x-form.row class="mb-3 !flex-row">
                         <x-input-group class="w-1/2">
                             <x-slot name="label" for="card_expires">{{ __('Scadenza carta') }} *</x-slot>
                             <x-input type="text" name="card_expires" placeholder="(MM/AA)" required />
@@ -27,11 +27,11 @@
                         </x-input-group>
                     </x-form.row>
                     <x-form.row>
-                        <x-input-group class="w-1/2">
+                        <x-input-group class="w-full md:w-1/2">
                             <x-slot name="label" for="name">{{ __('Nome') }}</x-slot>
                             <x-input type="text" name="name" required />
                         </x-input-group>
-                        <x-input-group class="w-1/2">
+                        <x-input-group class="w-full md:w-1/2">
                             <x-slot name="label" for="surename">{{ __('Cognome') }}</x-slot>
                             <x-input type="text" name="surename" required />
                         </x-input-group>
