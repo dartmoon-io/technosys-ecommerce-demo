@@ -29,7 +29,9 @@
             </x-summary>
 
             <div class="flex gap-2">
-                <a href="/" class="w-1/2 py-2 font-bold text-primary text-base text-center uppercase border border-primary rounded-[0.303rem] hover:text-white hover:bg-primary">indietro</a>
+                <x-link href="/" class="w-1/2 text-primary border-primary hover:text-white hover:bg-primary">
+                    indietro
+                </x-link>
                 <x-form class="w-1/2">
                     <x-button.primary class="w-full">
                         {{ __('Prosegui') }}
@@ -40,7 +42,7 @@
             <p class="mt-3 text-light-gray text-xs text-center">Merchant country: Italy</p>
         </x-card>
         <x-form>
-            <x-button class="w-full p-3 rounded-[0.303rem] border border-transparent hover:border-white">
+            <x-button class="w-full border p-2 rounded-[0.303rem] border-transparent hover:border-white">
                 {{ __('Annulla operazione') }}
             </x-button>
         </x-form>
