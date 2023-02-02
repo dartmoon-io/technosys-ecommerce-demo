@@ -18,7 +18,7 @@
     <body class="antialiased">
         <div {{ $attributes->merge(['class' => 'relative w-full min-h-screen py-10 z-10']) }}>
             {{ $slot }}
-            <img class="absolute top-0 left-0 w-full h-screen z-[-10]" src="/background/bg-primario.png" alt="Background_image">
+            <img class="absolute top-0 left-0 w-full h-full min-h-screen z-[-10]" src="/background/bg-primario.png" alt="Background_image">
         </div>
     </body>
 </html>
