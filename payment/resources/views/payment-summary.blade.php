@@ -5,26 +5,14 @@
             <h4 class="mb-3 text-primary text-base text-center">Riepilogo pagamento</h4>
             <x-summary class="mb-5">
                 <x-summary.row>
-                    <x-summary.content>
-                        <x-slot name="title">Importo</x-slot>
-                        20,00 €
-                    </x-summary.content>
+                    <x-summary.content title="Importo">20,00 €</x-summary.content>
                 </x-summary.row>
                 <x-summary.row>
-                    <x-summary.content>
-                        <x-slot name="title">Numero d'ordine</x-slot>
-                        ABCDEFGHIJKLMN
-                    </x-summary.content>
+                    <x-summary.content title="Numero d'ordine">ABCDEFGHIJKLMN</x-summary.content>
                 </x-summary.row>
                 <x-summary.row class="gap-6">
-                    <x-summary.content>
-                        <x-slot name="title">Carta</x-slot>
-                        **** **** **** 0006
-                    </x-summary.content>
-                    <x-summary.content>
-                        <x-slot name="title">CVV</x-slot>
-                        ***
-                    </x-summary.content>
+                    <x-summary.content title="Carta">**** **** **** 0006</x-summary.content>
+                    <x-summary.content title="CVV">***</x-summary.content>
                 </x-summary.row>
             </x-summary>
 

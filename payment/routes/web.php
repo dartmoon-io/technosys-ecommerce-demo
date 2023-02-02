@@ -23,3 +23,10 @@ Route::get('/', function () {
 Route::get('summary', function () {
     return view('payment-summary');
 });
+
+/**
+ * Waiting screen
+ */
+Route::get('waiting', function () {
+    return view('waiting-screen');
+});
