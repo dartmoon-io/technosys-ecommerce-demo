@@ -1,3 +1,5 @@
+@props(['title' => ''])
+
 <div>
     @if ($title ?? '')
         <small class="text-xs"> {{ $title }} </small>
