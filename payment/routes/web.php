@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/step1/{payment:token}', [PaymentController::class, 'step1'])->name('payment.step1');
+Route::post('/step1/{payment:token}/process', [PaymentController::class, 'step1Process'])->name('payment.step1.process');
+
 Route::get('/step2/{payment:token}', [PaymentController::class, 'step2'])->name('payment.step2');
-Route::get('/processing/{payment:token}', [PaymentController::class, 'processing'])->name('payment.processing');
-Route::get('/error', [PaymentController::class, 'error'])->name('payment.error');
+Route::post('/step2/{payment:token}/process', [PaymentController::class, 'step2Process'])->name('payment.step2.process');

@@ -25,6 +25,9 @@ class Payment extends Model
         'cancel_url',
         'status',
         'token',
+        'first_name',
+        'last_name',
+        'email',
     ];
 
     /*

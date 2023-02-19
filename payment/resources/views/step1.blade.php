@@ -9,31 +9,31 @@
                 <span class="block w-full h-[0.063rem] mb-3 bg-light-gray"></span>
 
                 <h4 class="mb-3 text-primary text-base text-center tracking-[0.05rem]">Inserisci i dati e procedi al pagamento</h4>
-                <x-form>
+                <x-form method="post" :action="route('payment.step1.process', ['payment' => $payment->token])">
                     <x-form.row class="mb-3">
                         <x-input-group class="w-full">
                             <x-slot name="label" for="card_number">{{ __('Numero di carta') }} *</x-slot>
-                            <x-input type="text" name="card_number" placeholder="0000 0000 0000 0000" required />
+                            <x-input type="text" name="number" placeholder="0000000000000000" maxlength="16" required />
                         </x-input-group>
                     </x-form.row>
                     <x-form.row class="mb-3 !flex-row">
                         <x-input-group class="w-1/2">
                             <x-slot name="label" for="card_expires">{{ __('Scadenza carta') }} *</x-slot>
-                            <x-input type="text" name="card_expires" placeholder="(MM/AA)" required />
+                            <x-input type="text" name="expiration" placeholder="(MM/AA)" maxlength="5" required />
                         </x-input-group>
                         <x-input-group class="w-1/2">
                             <x-slot name="label" for="card_CVV">{{ __('CVV') }} *</x-slot>
-                            <x-input type="text" name="card_CVV" placeholder="000" required />
+                            <x-input type="text" name="cvv" placeholder="000" required />
                         </x-input-group>
                     </x-form.row>
                     <x-form.row>
                         <x-input-group class="w-full md:w-1/2">
                             <x-slot name="label" for="name">{{ __('Nome') }}</x-slot>
-                            <x-input type="text" name="name" required />
+                            <x-input type="text" name="first_name" required />
                         </x-input-group>
                         <x-input-group class="w-full md:w-1/2">
                             <x-slot name="label" for="surename">{{ __('Cognome') }}</x-slot>
-                            <x-input type="text" name="surename" required />
+                            <x-input type="text" name="last_name" required />
                         </x-input-group>
                     </x-form.row>
                     <span class="block mt-1 mb-3 text-xs">Come indicati sulla carta</span>

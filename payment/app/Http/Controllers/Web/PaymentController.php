@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\PaymentMustBePending;
+use App\Http\Requests\Web\PaymentStep1Request;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,17 @@ class PaymentController extends Controller
         return view('step1', [
             'payment' => $payment,
         ]);
+    }
+
+    public function step1Process(Payment $payment, PaymentStep1Request $request)
+    {
+        $payment->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('payment.step2', $payment);
     }
 
     public function step2(Payment $payment)

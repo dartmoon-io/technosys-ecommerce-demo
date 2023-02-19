@@ -18,7 +18,7 @@ class PaymentMustBePending
     public function handle(Request $request, Closure $next)
     {
         if ($request->payment->status !== PaymentStatus::PENDING) {
-            return redirect()->route('payment.error');
+            return abort(404);
         }
 
         return $next($request);
