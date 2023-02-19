@@ -1,0 +1,16 @@
+{
+    "name": "dartmoon/woocommerce-demo-payment",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Dartmoon\\WoocCmmerceDemoPayment\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dartmoon",
+            "email": "hello@dartmoon.io"
+        }
+    ],
+    "require": {}
+}
