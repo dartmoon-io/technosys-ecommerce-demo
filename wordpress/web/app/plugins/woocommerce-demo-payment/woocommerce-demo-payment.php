@@ -7,7 +7,7 @@
  * Version:     1.0.0
  */
 
-use Dartmoon\WoocCmmerceDemoPayment\WCDemoGateway;
+use Dartmoon\WooCommerceDemoPayment\WooCommerceGateway;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -38,8 +38,10 @@ class WCDemoPayment
 
 	public static function add_to_gateways($gateways)
 	{
-		$gateways['demo'] = WCDemoGateway::class;
+		$gateways[] = WooCommerceGateway::class;
 	    return $gateways;
 	}
 
 }
+
+WCDemoPayment::initialize();
