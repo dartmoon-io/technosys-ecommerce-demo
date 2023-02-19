@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-LABEL maintainer="Dartmoon S.r.l."
+LABEL maintainer="Dartmoon Srl"
 
 # Require UID and GID of host user, so that we can map the user inside
 # the container to the user in the host to prevent permissions issues
