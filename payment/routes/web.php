@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,20 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-/**
- * Payment summary
- */
-Route::get('summary', function () {
-    return view('payment-summary');
-});
-
-/**
- * Waiting screen
- */
-Route::get('waiting', function () {
-    return view('waiting-screen');
-});
+Route::get('/step1/{payment:token}', [PaymentController::class, 'step1'])->name('payment.step1');
+Route::get('/step2', [PaymentController::class, 'step2'])->name('payment.step2');
+Route::get('/processing', [PaymentController::class, 'processing'])->name('payment.processing');
+Route::get('/error', [PaymentController::class, 'error'])->name('payment.error');
