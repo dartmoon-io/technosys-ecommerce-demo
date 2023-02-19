@@ -3,22 +3,30 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\PaymentMustBePending;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function step1(Payment $payment)
+    public function __construct()
     {
-        return view('step1');
+        $this->middleware(PaymentMustBePending::class);
     }
 
-    public function step2()
+    public function step1(Payment $payment)
+    {
+        return view('step1', [
+            'payment' => $payment,
+        ]);
+    }
+
+    public function step2(Payment $payment)
     {
         return view('step2');
     }
 
-    public function processing()
+    public function processing(Payment $payment)
     {
         return view('processing');
     }

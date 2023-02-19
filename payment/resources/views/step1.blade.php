@@ -3,9 +3,9 @@
         <div class="flex flex-col items-center justify-center w-full md:w-1/2">
             <h3 class="mb-5 font-black text-white text-center">PAYMENT SYSTEM DEMO</h3>
             <x-card class="mb-3 py-5 px-3 w-[20.625rem] md:w-[22.5rem]">
-                <h2 class="mb-2 font-bold text-black text-center text-4xl tracking-wide">20,00 €</h2>
+                <h2 class="mb-2 font-bold text-black text-center text-4xl tracking-wide">{{ number_format($payment->amount, 2, ',', '.')}} €</h2>
                 <span class="block text-black text-center">Ordine</span>
-                <p class="mb-3 font-bold text-black text-center">ABCDEFGHIJKLMN</p>
+                <p class="mb-3 font-bold text-black text-center">{{ $payment->description }}</p>
                 <span class="block w-full h-[0.063rem] mb-3 bg-light-gray"></span>
 
                 <h4 class="mb-3 text-primary text-base text-center tracking-[0.05rem]">Inserisci i dati e procedi al pagamento</h4>
