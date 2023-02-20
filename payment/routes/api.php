@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/prepare', [PaymentController::class, 'prepare']);
-Route::get('/status', [PaymentController::class, 'status']);
+Route::get('/status/{payment:token}', [PaymentController::class, 'status']);

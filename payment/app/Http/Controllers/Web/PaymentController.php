@@ -98,6 +98,9 @@ class PaymentController extends Controller
         $query = parse_url($payment->notify_url, PHP_URL_QUERY);
         $notify_url = $payment->notify_url . ($query ? '&' : '?') . 'payment=' . $payment->token;
 
+        $signature = hash_hmac('sha256', json_encode($payment->token), config('gateway.client_secret'));
+        $notify_url .= '&signature=' . $signature;
+
         return redirect()->away($notify_url);
     }
 }

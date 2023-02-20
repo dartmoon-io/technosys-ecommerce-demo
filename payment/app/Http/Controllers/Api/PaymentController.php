@@ -16,13 +16,22 @@ class PaymentController extends Controller
         $payment->status = PaymentStatus::PENDING;
         $payment->save();
 
-        return response()->json([
+        $data = [
+            'payment' => $payment->token,
             'redirect_url' => route('payment.step1', ['payment' => $payment->token]),
-        ]);
+        ];
+        $data['signature'] = hash_hmac('sha256', json_encode($data), config('gateway.client_secret'));
+
+        return response()->json($data);
     }
 
-    public function status()
+    public function status(Payment $payment)
     {
-        dd('get payment status');
+        $data = [
+            'status' => $payment->status,
+        ];
+        $data['signature'] = hash_hmac('sha256', json_encode($data), config('gateway.client_secret'));
+
+        return response()->json($data);
     }
 }
