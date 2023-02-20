@@ -36,7 +36,7 @@ class WooCommerceGateway extends WC_Payment_Gateway
         $payment = $this->api->preparePayment(
             $order->get_total(),
             $order->get_currency(),
-            'Order #' . $order->get_id(),
+            'Ordine #' . $order->get_id(),
             home_url() . '/app/plugins/woocommerce-demo-payment/notify.php?order_id=' . $order_id,
             home_url() . '/app/plugins/woocommerce-demo-payment/cancel.php?order_id=' . $order_id,
         );

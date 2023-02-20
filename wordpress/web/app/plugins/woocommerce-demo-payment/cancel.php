@@ -1,7 +1,5 @@
 <?php
 
-use Dartmoon\WooCommerceDemoPayment\DemoPaymentApi;
-
 require_once (dirname(dirname(dirname(__DIR__))) . '/wp/wp-load.php');
 
 // Let's check if the payment token is set and the order id is set
