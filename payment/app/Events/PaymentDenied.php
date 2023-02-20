@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Payment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,23 +15,15 @@ class PaymentDenied
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $payment;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Payment $payment)
     {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
+        $this->payment = $payment;
     }
 }
