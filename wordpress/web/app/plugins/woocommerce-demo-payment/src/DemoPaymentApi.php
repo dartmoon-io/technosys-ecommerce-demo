@@ -2,6 +2,7 @@
 
 namespace Dartmoon\WooCommerceDemoPayment;
 
+use Exception;
 use GuzzleHttp\Client;
 
 class DemoPaymentApi
@@ -10,7 +11,7 @@ class DemoPaymentApi
     protected const PAYMENT_GATEWAY_CLIENT_ID = '6e2cfb41-4c06-44f5-af1d-38599cc0013d';
     protected const PAYMENT_GATEWAY_CLIENT_SECRET = 'CogSldhzTMWERuAHFVMjFOfrAlvrkV';
 
-    public function preparePayment(float $amount, string $currency, string $description): array
+    public function preparePayment(float $amount, string $currency, string $description, string $notify_url, string $cancel_url): array
     {
         $url = self::PAYMENT_GATEWAY_URL . '/api/prepare';
         $data = [
@@ -18,8 +19,8 @@ class DemoPaymentApi
             'amount' => $amount,
             'currency' => $currency,
             'description' => $description,
-            'notify_url' => 'http://prova.test',
-            'cancel_url' => 'http://prova.test',
+            'notify_url' => $notify_url,
+            'cancel_url' => $cancel_url,
         ];
 
         $signature = hash_hmac('sha256', json_encode($data), self::PAYMENT_GATEWAY_CLIENT_SECRET);
@@ -32,6 +33,24 @@ class DemoPaymentApi
         ]);
 
         $body = json_decode($response->getBody(), true);
-        return $body['redirect_url'];
+        return $body;
+    }
+
+    public function getPaymentStatus($payment): array
+    {
+        $url = self::PAYMENT_GATEWAY_URL . '/api/status/' . $payment;
+        $client = new Client();
+        $response = $client->get($url);
+
+        $body = json_decode($response->getBody(), true);
+
+        $data = ['status' => $body['status']];
+        $signature = hash_hmac('sha256', json_encode($data), self::PAYMENT_GATEWAY_CLIENT_SECRET);
+
+        if ($signature !== $body['signature']) {
+            throw new Exception('Invalid signature');
+        }
+
+        return $body;
     }
 }

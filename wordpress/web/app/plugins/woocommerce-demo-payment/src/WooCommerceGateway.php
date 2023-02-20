@@ -33,15 +33,20 @@ class WooCommerceGateway extends WC_Payment_Gateway
 
         // Let's make a request to the payment gateway
         // to prepare the payment and get the payment url
-        $returnUrl = $this->api->preparePayment(
+        $payment = $this->api->preparePayment(
             $order->get_total(),
             $order->get_currency(),
-            'Order #' . $order->get_id()
+            'Order #' . $order->get_id(),
+            home_url() . '/app/woocommerce-demo-payment/notify.php?order_id=' . $order_id,
+            home_url() . '/app/woocommerce-demo-payment/cancel.php?order_id=' . $order_id,
         );
+
+        // Save the payment token in the order
+        update_meta($order_id, 'payment_token', $payment['payment']);
 
 		return [
 			'result' => 'success',
-			'redirect' => $returnUrl
+			'redirect' => $payment['redirect_url'],
 		];
 	}
 }

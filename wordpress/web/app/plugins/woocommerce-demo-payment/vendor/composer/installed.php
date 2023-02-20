@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2da4b89d52b2f92e5b7a21869cec5400c2609869',
+        'reference' => '84eed86fed399ed784e141ad09a0cae705f05114',
         'name' => 'dartmoon/woocommerce-demo-payment',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2da4b89d52b2f92e5b7a21869cec5400c2609869',
+            'reference' => '84eed86fed399ed784e141ad09a0cae705f05114',
             'dev_requirement' => false,
         ),
         'guzzlehttp/guzzle' => array(
@@ -101,12 +101,12 @@
             'dev_requirement' => false,
         ),
         'symfony/deprecation-contracts' => array(
-            'pretty_version' => 'v3.0.2',
-            'version' => '3.0.2.0',
+            'pretty_version' => 'v2.5.2',
+            'version' => '2.5.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(),
-            'reference' => '26954b3d62a6c5fd0ea8a2a00c0353a14978d05c',
+            'reference' => 'e8b495ea28c1d97b5e0c121748d6f9b53d075c66',
             'dev_requirement' => false,
         ),
         'symfony/polyfill-mbstring' => array(
