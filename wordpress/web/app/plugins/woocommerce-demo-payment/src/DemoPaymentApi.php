@@ -7,7 +7,9 @@ use GuzzleHttp\Client;
 
 class DemoPaymentApi
 {
-    protected const PAYMENT_GATEWAY_URL = 'http://demo-payment.test';
+    public const PAYMENT_AUTHORIZED = 'authorized';
+    
+    protected const PAYMENT_GATEWAY_URL = 'http://payment';
     protected const PAYMENT_GATEWAY_CLIENT_ID = '6e2cfb41-4c06-44f5-af1d-38599cc0013d';
     protected const PAYMENT_GATEWAY_CLIENT_SECRET = 'CogSldhzTMWERuAHFVMjFOfrAlvrkV';
 

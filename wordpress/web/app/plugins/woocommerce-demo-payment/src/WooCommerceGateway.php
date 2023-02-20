@@ -37,12 +37,12 @@ class WooCommerceGateway extends WC_Payment_Gateway
             $order->get_total(),
             $order->get_currency(),
             'Order #' . $order->get_id(),
-            home_url() . '/app/woocommerce-demo-payment/notify.php?order_id=' . $order_id,
-            home_url() . '/app/woocommerce-demo-payment/cancel.php?order_id=' . $order_id,
+            home_url() . '/app/plugins/woocommerce-demo-payment/notify.php?order_id=' . $order_id,
+            home_url() . '/app/plugins/woocommerce-demo-payment/cancel.php?order_id=' . $order_id,
         );
 
         // Save the payment token in the order
-        update_meta($order_id, 'payment_token', $payment['payment']);
+        update_post_meta($order_id, 'payment_token', $payment['payment']);
 
 		return [
 			'result' => 'success',
