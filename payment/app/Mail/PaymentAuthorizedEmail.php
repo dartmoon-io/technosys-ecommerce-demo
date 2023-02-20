@@ -28,7 +28,7 @@ class PaymentAuthorizedEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Pagamento autorizzato',
+            subject: 'Pagamento AUTORIZZATO',
         );
     }
 

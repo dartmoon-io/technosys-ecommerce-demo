@@ -28,7 +28,7 @@ class PaymentDeniedEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Payment negato',
+            subject: 'Pagamento NEGATO',
         );
     }
 

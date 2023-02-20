@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\PaymentAuthorized;
 use App\Events\PaymentDenied;
 use App\Listeners\SendPaymentAuthorizedEmail;
+use App\Listeners\SendPaymentDeniedEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
             SendPaymentAuthorizedEmail::class,
         ],
         PaymentDenied::class => [
-            SendPaymentAuthorizedEmail::class,
+            SendPaymentDeniedEmail::class,
         ],
     ];
 
