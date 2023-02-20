@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Enums\PaymentStatus;
+use App\Events\PaymentAuthorized;
+use App\Events\PaymentDenied;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\PaymentMustBeInNeedConfirmationStatus;
 use App\Http\Middleware\PaymentMustBeInPendingStatus;
@@ -83,10 +85,19 @@ class PaymentController extends Controller
 
     public function completePayment(Payment $payment)
     {
-        // return view('processing', [
-        //     'payment' => $payment,
-        // ]);
+        $payment->status = config('gateway.cards.' . $payment->card_number) ?? PaymentStatus::DENIED;
+        $payment->save();
 
-        dd('complete Payment');
+        $event = $payment->status === PaymentStatus::AUTHORIZED ?
+            new PaymentAuthorized($payment) :
+            new PaymentDenied($payment);
+
+        event($event);
+
+        // Prepare the notification to the merchant
+        $query = parse_url($payment->notify_url, PHP_URL_QUERY);
+        $notify_url = $payment->notify_url . ($query ? '&' : '?') . 'payment=' . $payment->token;
+
+        return redirect()->away($notify_url);
     }
 }
