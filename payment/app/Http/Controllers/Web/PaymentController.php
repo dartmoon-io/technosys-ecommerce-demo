@@ -6,6 +6,7 @@ use App\Enums\PaymentStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\PaymentMustBeInNeedConfirmationStatus;
 use App\Http\Middleware\PaymentMustBeInPendingStatus;
+use App\Http\Middleware\PaymentMustBeInProcessingStatus;
 use App\Http\Requests\Web\PaymentStep1Request;
 use App\Models\Payment;
 
@@ -14,7 +15,8 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->middleware(PaymentMustBeInPendingStatus::class)->only(['step1', 'step1Process']);
-        $this->middleware(PaymentMustBeInNeedConfirmationStatus::class)->only(['step2', 'step2Process']);
+        $this->middleware(PaymentMustBeInNeedConfirmationStatus::class)->only(['step2', 'step2Process', 'step2Back']);
+        $this->middleware(PaymentMustBeInProcessingStatus::class)->only(['processingPayment', 'completePayment']);
     }
 
     public function step1(Payment $payment)
@@ -50,18 +52,41 @@ class PaymentController extends Controller
 
     public function step2Process(Payment $payment)
     {
-        return view('step2', [
+        $payment->status = PaymentStatus::PROCESSING;
+        $payment->save();
+
+        return redirect()->route('payment.processing', $payment);
+    }
+
+    public function step2Back(Payment $payment)
+    {
+        $payment->status = PaymentStatus::PENDING;
+        $payment->save();
+
+        return redirect()->route('payment.step1', $payment);
+    }
+
+    public function cancelPayment(Payment $payment)
+    {
+        $payment->status = PaymentStatus::CANCELED;
+        $payment->save();
+
+        return redirect()->away($payment->cancel_url);
+    }
+
+    public function processingPayment(Payment $payment)
+    {
+        return view('processing', [
             'payment' => $payment,
         ]);
     }
 
-    public function processing(Payment $payment)
+    public function completePayment(Payment $payment)
     {
-        return view('processing');
-    }
+        // return view('processing', [
+        //     'payment' => $payment,
+        // ]);
 
-    public function error()
-    {
-        return view('error');
+        dd('complete Payment');
     }
 }

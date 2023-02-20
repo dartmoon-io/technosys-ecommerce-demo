@@ -7,5 +7,7 @@
                 <lottie-player class="mx-auto" src="/lottie-animation/98770.json" background="transparent" speed="1" style="width: 80px; height: 62px;" loop autoplay></lottie-player>
             </x-animation>
         </x-card>
+
+        <x-form method="post" :action="route('payment.complete', $payment)" x-init="setTimeout(() => $el.submit(), 3000)"></x-form>
     </div>
 </x-layout>

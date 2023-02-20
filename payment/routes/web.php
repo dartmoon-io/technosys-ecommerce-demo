@@ -19,3 +19,9 @@ Route::post('/step1/{payment:token}/process', [PaymentController::class, 'step1P
 
 Route::get('/step2/{payment:token}', [PaymentController::class, 'step2'])->name('payment.step2');
 Route::post('/step2/{payment:token}/process', [PaymentController::class, 'step2Process'])->name('payment.step2.process');
+Route::post('/step2/{payment:token}/back', [PaymentController::class, 'step2Back'])->name('payment.step2.back');
+
+Route::post('/cancel/{payment:token}', [PaymentController::class, 'cancelPayment'])->name('payment.cancel');
+
+Route::get('/processing/{payment:token}', [PaymentController::class, 'processingPayment'])->name('payment.processing');
+Route::post('/complete/{payment:token}', [PaymentController::class, 'completePayment'])->name('payment.complete');

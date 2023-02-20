@@ -8,6 +8,8 @@ final class PaymentStatus extends Enum
 {
     const PENDING = 'pending';
     const NEED_CONFIRMATION = 'need_confirmation';
+    const PROCESSING = 'processing';
     const DENIED = 'denied';
     const AUTHORIZED = 'authorized';
+    const CANCELED = 'canceled';
 }

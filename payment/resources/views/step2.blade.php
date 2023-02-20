@@ -17,11 +17,13 @@
             </x-summary>
 
             <div class="flex gap-2">
-                <x-link href="/" class="w-1/2 text-primary border-primary hover:text-white hover:bg-primary">
-                    indietro
-                </x-link>
-                <x-form class="w-1/2">
-                    <x-button.primary class="w-full">
+                <x-form class="w-1/2" method="post" :action="route('payment.step2.back', $payment)">
+                    <x-button.back class="w-full" type="submit">
+                        {{ __('Indietro') }}
+                    </x-button.ba>
+                </x-form>
+                <x-form class="w-1/2" method="post" :action="route('payment.step2.process', $payment)">
+                    <x-button.primary class="w-full" type="submit">
                         {{ __('Prosegui') }}
                     </x-button.primary>
                 </x-form>
@@ -29,8 +31,8 @@
 
             <p class="mt-3 text-light-gray text-xs text-center">Merchant country: Italy</p>
         </x-card>
-        <x-form>
-            <x-button class="w-full border p-2 rounded-[0.303rem] border-transparent hover:border-white">
+        <x-form method="post" :action="route('payment.cancel', $payment)">
+            <x-button class="w-full border p-2 rounded-[0.303rem] border-transparent hover:border-white" type="submit">
                 {{ __('Annulla operazione') }}
             </x-button>
         </x-form>
