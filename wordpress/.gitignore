@@ -1,6 +1,7 @@
 # Application
 web/app/plugins/*
 !web/app/plugins/.gitkeep
+!web/app/plugins/woocommerce-demo-payment
 web/app/mu-plugins/*/
 web/app/themes/twentytwentythree/
 web/app/upgrade

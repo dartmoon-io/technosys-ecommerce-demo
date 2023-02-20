@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     mode: 'jit',
@@ -24,5 +26,10 @@ module.exports = {
             },
         },
     },
-    plugins: [],
-    }
+    plugins: [
+        plugin(({ addVariant }) => {
+            addVariant('current', ['&.current', '.current &'])
+            addVariant('error', ['&.error', '.error &'])
+        })
+    ],
+}
