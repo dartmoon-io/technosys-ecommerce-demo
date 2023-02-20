@@ -11,36 +11,66 @@
                 <h4 class="mb-3 text-primary text-base text-center tracking-[0.05rem]">Inserisci i dati e procedi al pagamento</h4>
                 <x-form method="post" :action="route('payment.step1.process', ['payment' => $payment->token])">
                     <x-form.row class="mb-3">
-                        <x-input-group class="w-full">
+                        <x-input-group class="w-full" :has-error="$errors->has('card_number')">
                             <x-slot name="label" for="card_number">{{ __('Numero di carta') }} *</x-slot>
-                            <x-input type="text" name="number" placeholder="0000000000000000" maxlength="16" required />
+                            <x-input type="text" name="card_number" placeholder="0000000000000000" maxlength="16" :value="old('card_number')" required />
+                            @if ($errors->has('card_number'))
+                                <x-slot name="error">
+                                    <x-input-group.error>{{ $errors->first('card_number') }}</x-input-group.error>
+                                </x-slot>
+                            @endif
                         </x-input-group>
                     </x-form.row>
-                    <x-form.row class="mb-3 !flex-row">
+                    <x-form.row class="mb-3 !flex-row" :has-error="$errors->has('card_expiration')">
                         <x-input-group class="w-1/2">
-                            <x-slot name="label" for="card_expires">{{ __('Scadenza carta') }} *</x-slot>
-                            <x-input type="text" name="expiration" placeholder="(MM/AA)" maxlength="5" required />
+                            <x-slot name="label" for="card_expiration">{{ __('Scadenza carta') }} *</x-slot>
+                            <x-input type="text" name="card_expiration" placeholder="(MM/AA)" maxlength="5" :value="old('card_expiration')" required />
+                            @if ($errors->has('card_expiration'))
+                                <x-slot name="error">
+                                    <x-input-group.error>{{ $errors->first('card_expiration') }}</x-input-group.error>
+                                </x-slot>
+                            @endif
                         </x-input-group>
-                        <x-input-group class="w-1/2">
-                            <x-slot name="label" for="card_CVV">{{ __('CVV') }} *</x-slot>
-                            <x-input type="text" name="cvv" placeholder="000" required />
+                        <x-input-group class="w-1/2" :has-error="$errors->has('card_cvv')">
+                            <x-slot name="label" for="card_cvv">{{ __('CVV') }} *</x-slot>
+                            <x-input type="text" name="card_cvv" placeholder="000" maxlength="3" :value="old('card_cvv')" required />
+                            @if ($errors->has('card_cvv'))
+                                <x-slot name="error">
+                                    <x-input-group.error>{{ $errors->first('card_cvv') }}</x-input-group.error>
+                                </x-slot>
+                            @endif
                         </x-input-group>
                     </x-form.row>
                     <x-form.row>
-                        <x-input-group class="w-full md:w-1/2">
+                        <x-input-group class="w-full md:w-1/2" :has-error="$errors->has('first_name')">
                             <x-slot name="label" for="name">{{ __('Nome') }}</x-slot>
-                            <x-input type="text" name="first_name" required />
+                            <x-input type="text" name="first_name" :value="old('first_name')" required />
+                            @if ($errors->has('first_name'))
+                                <x-slot name="error">
+                                    <x-input-group.error>{{ $errors->first('first_name') }}</x-input-group.error>
+                                </x-slot>
+                            @endif
                         </x-input-group>
-                        <x-input-group class="w-full md:w-1/2">
+                        <x-input-group class="w-full md:w-1/2" :has-error="$errors->has('last_name')">
                             <x-slot name="label" for="surename">{{ __('Cognome') }}</x-slot>
-                            <x-input type="text" name="last_name" required />
+                            <x-input type="text" name="last_name" :value="old('last_name')" required />
+                            @if ($errors->has('last_name'))
+                                <x-slot name="error">
+                                    <x-input-group.error>{{ $errors->first('last_name') }}</x-input-group.error>
+                                </x-slot>
+                            @endif
                         </x-input-group>
                     </x-form.row>
                     <span class="block mt-1 mb-3 text-xs">Come indicati sulla carta</span>
                     <x-form.row class="mb-6">
-                        <x-input-group class="w-full">
+                        <x-input-group class="w-full" :has-error="$errors->has('email')">
                             <x-slot name="label" for="email">{{ __('E-mail') }} *</x-slot>
-                            <x-input type="email" name="email" required />
+                            <x-input type="email" name="email" :value="old('email')" required />
+                            @if ($errors->has('email'))
+                                <x-slot name="error">
+                                    <x-input-group.error>{{ $errors->first('email') }}</x-input-group.error>
+                                </x-slot>
+                            @endif
                         </x-input-group>
                     </x-form.row>
                     <x-form.row>
@@ -66,7 +96,7 @@
             <x-card class="w-[20.625rem] py-4 px-6">
                 <h4 class="font-bold text-black text-base uppercase">PAGAMENTO accettatto</h4>
                 <h4 class="mb-6 font-bold text-success text-base uppercase">message ok</h4>
-                <p class="text-black text-base">4539 9700 0000 0006</p>
+                <p class="text-black text-base">4539970000000006</p>
                 <div class="flex justify-between">
                     <p class="text-black text-base">12/30</p>
                     <p class="text-black text-base">CVV: 123</p>
@@ -76,7 +106,7 @@
             <x-card class="w-[20.625rem] py-4 px-6">
                 <h4 class="font-bold text-black text-base uppercase">PAGAMENTO rifiutato</h4>
                 <h4 class="mb-6 font-bold text-error text-base uppercase">AUTHORIZATION DENIED</h4>
-                <p class="text-black text-base">4539 9700 0000 0006</p>
+                <p class="text-black text-base">4539970000000007</p>
                 <div class="flex justify-between">
                     <p class="text-black text-base">12/30</p>
                     <p class="text-black text-base">CVV: 123</p>

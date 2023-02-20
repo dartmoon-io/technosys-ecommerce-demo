@@ -7,7 +7,7 @@ use BenSampo\Enum\Enum;
 final class PaymentStatus extends Enum
 {
     const PENDING = 'pending';
-    const PROCESSING = 'processing';
+    const NEED_CONFIRMATION = 'need_confirmation';
     const DENIED = 'denied';
     const AUTHORIZED = 'authorized';
 }

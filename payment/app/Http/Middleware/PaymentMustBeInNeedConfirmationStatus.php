@@ -6,7 +6,7 @@ use App\Enums\PaymentStatus;
 use Closure;
 use Illuminate\Http\Request;
 
-class PaymentMustBePending
+class PaymentMustBeInNeedConfirmationStatus
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class PaymentMustBePending
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->payment->status !== PaymentStatus::PENDING) {
+        if ($request->payment->status !== PaymentStatus::NEED_CONFIRMATION) {
             return abort(404);
         }
 

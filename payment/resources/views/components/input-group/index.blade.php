@@ -1,4 +1,4 @@
-@props(['hasError' => false, 'errorMessage' => ''])
+@props(['hasError' => false])
 
 <div {{ $attributes->class(['error' => $hasError]) }}>
     @if ($label ?? '')
@@ -7,10 +7,6 @@
     <div class="relative">
         {{ $slot }}
     </div>
-
-    @if ($hasError && $errorMessage)
-        <x-input-group.error>{{ $errorMessage }}</x-input-group.error>
-    @endif
 
     @if ($error ?? false)
         {{ $error }}

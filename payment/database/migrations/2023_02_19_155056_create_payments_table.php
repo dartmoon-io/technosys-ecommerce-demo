@@ -22,9 +22,12 @@ return new class extends Migration
             $table->text('cancel_url');
             $table->string('status');
             $table->string('token')->unique();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('card_number')->nullable();
+            $table->string('card_expiration')->nullable();
+            $table->string('card_cvv')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

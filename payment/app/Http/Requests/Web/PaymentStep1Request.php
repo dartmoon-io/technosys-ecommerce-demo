@@ -15,9 +15,9 @@ class PaymentStep1Request extends FormRequest
     public function rules()
     {
         return [
-            'number' => ['required', Rule::in(['4539970000000006', ['4539970000000007']])],
-            'cvv' => ['required'],
-            'expiration' => 'required|date_format:m/Y|after_or_equal:today',
+            'card_number' => ['required', Rule::in(['4539970000000006', '4539970000000007'])],
+            'card_cvv' => 'required|digits:3',
+            'card_expiration' => 'required|date_format:m/y|after_or_equal:today',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -28,6 +29,9 @@ class Payment extends Model
         'first_name',
         'last_name',
         'email',
+        'card_number',
+        'card_expiration',
+        'card_cvv',
     ];
 
     /*
@@ -75,13 +79,14 @@ class Payment extends Model
 
     /*
     |--------------------------------------------------------------------------
-    | ACCESSORS
+    | ATTRIBUTES
     |--------------------------------------------------------------------------
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
+    protected function cardNumberLast4Digits(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->card_number ? substr($this->card_number, -4) : null
+        );
+    }
 }
