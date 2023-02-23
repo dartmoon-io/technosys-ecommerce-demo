@@ -9,9 +9,11 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 sudo apt-get install -y openssh-server
 
 # Download code
-sudo mkdir -p ~/Desktop/tecnosys-ecommerce-demo
-cd ~/Desktop/tecnosys-ecommerce-demo
-curl -LJ `curl -s https://api.github.com/repos/dartmoon-io/tecnosys-ecommerce-demo/releases/latest | python3  -c 'import sys, json; print(json.load(sys.stdin)["tarball_url"])'` | tar zxf - --strip=1
+cd ~/Desktop
+rm -rf technosys-ecommerce-demo
+sudo mkdir technosys-ecommerce-demo
+cd technosys-ecommerce-demo
+curl -LJ `curl -s https://api.github.com/repos/dartmoon-io/technosys-ecommerce-demo/releases/latest | python3  -c 'import sys, json; print(json.load(sys.stdin)["tarball_url"])'` | tar zxf - --strip=1
 
 # Disable systemd-resolved
 sudo systemctl disable systemd-resolved.service
