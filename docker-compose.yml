@@ -1,0 +1,144 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    traefik:
+        image: "traefik:v2.9"
+        command:
+            - --entrypoints.web.address=:80
+            - --providers.docker
+            - --providers.docker.network=demo-network
+            - --api.dashboard=true
+            - --serversTransport.insecureSkipVerify=true
+            - --providers.docker.exposedByDefault=false
+            - --api.insecure
+        ports:
+            - 80:80
+            - 8080:8080
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        labels:
+            - "traefik.enable=true"
+        restart: always
+        networks:
+            - demo-network
+
+    payment:
+        build:
+            context: ./payment
+            dockerfile: Dockerfile
+            args:
+                UID: '${DOCKER_UID:-1000}'
+                GID: '${DOCKER_GID:-1000}'
+        image: tecnosys-ecommerce-demo/payment
+        environment:
+            APP_NAME: "Laravel"
+            APP_ENV: "local"
+            APP_KEY: "base64:dbUhjrzYSv1dddeTu10IbaJCIQx3o4r1q6uCdXsHeio: "
+            APP_DEBUG: "true"
+            APP_URL: "http://demo-payment.test"
+            LOG_CHANNEL: "stack"
+            LOG_DEPRECATIONS_CHANNEL: "null"
+            LOG_LEVEL: "debug"
+            DB_CONNECTION: "mysql"
+            DB_HOST: "mariadb"
+            DB_PORT: "3306"
+            DB_DATABASE: "payment"
+            DB_USERNAME: "root"
+            DB_PASSWORD: "root"
+            MAIL_MAILER: "smtp"
+            MAIL_HOST: "mailhog"
+            MAIL_PORT: "1025"
+            MAIL_USERNAME: "null"
+            MAIL_PASSWORD: "null"
+            MAIL_ENCRYPTION: "null"
+            MAIL_FROM_ADDRESS: "hello@demo-payment.test"
+            MAIL_FROM_NAME: "Demo Payment System"
+        volumes:
+            - './payment:/var/www/html'
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.payment.rule=Host(`demo-payment.test`)"
+            - "traefik.http.routers.payment.entrypoints=web"
+            - "traefik.http.services.payment.loadbalancer.server.port=80"
+            - "traefik.http.services.payment.loadbalancer.server.scheme=http"
+        networks:
+            - demo-network
+        depends_on:
+            - mariadb
+            - mailhog
+
+    wordpress:
+        build:
+            context: ./wordpress
+            dockerfile: Dockerfile
+            args:
+                UID: '${DOCKER_UID:-1000}'
+                GID: '${DOCKER_GID:-1000}'
+        image: tecnosys-ecommerce-demo/wordpress
+        environment:
+            DB_HOST: "mariadb"
+            DB_NAME: "wordpress"
+            DB_USER: "root"
+            DB_PASSWORD: "root"
+            WP_ENV: "development"
+            WP_HOME: "http://ecommerce.test"
+            WP_SITEURL: "http://ecommerce.test/wp"
+            AUTH_KEY: "PjQ(q%h%sM?@5<efV>[Zt*&L,F]M9u`!@+cHk%m2PaL!Oded8H@unq)5etr&8>]r"
+            SECURE_AUTH_KEY: "q;V5t$$^Grn_p<d_Des=(hi7PZGC,acro&XJ9a4:hvh(P8U^ncR*|>zlO_#bF[u;%"
+            LOGGED_IN_KEY: ",Y6(7u&,^^hjJD2rR}Z>y&?i4Z?T:|ymFEDe$$xl3h3gBAEz92Om?up|TT8+y7ikT"
+            NONCE_KEY: "Xama_Xr7;Uz%/IrZ.78N>XjsFE4k0h3Y!H__@@S<kd<Sj$$tHz>e(KDc381b&Hq)@"
+            AUTH_SALT: "zy?<,bG}uR5OkV*G#|%/9NT`l^N2cK,g0;_&U-_$$x@&,?1vzNtyz_&]&59@1*hGG"
+            SECURE_AUTH_SALT: "g=]cjon64sjjtkB[I!f%%ShdBg`<tr`KuS)s?e;va@*mFEbex!wm]=|D|=4R;NnJ"
+            LOGGED_IN_SALT: "7{u2u:3q4E-t%F[8q(MK%/qq[|0u8pA--iVsC6`m_tFCd+B}WE6wh:uI9]=)]O67"
+            NONCE_SALT: "VvaeAtgy(ggq^^_&,fBoygr0x^1Sj5Dv5Q1#n769O|{|3e{)[hdl_H9T+S|lc1q{"
+        volumes:
+            - './wordpress:/var/www/html'
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.wordpress.rule=Host(`ecommerce.test`)"
+            - "traefik.http.routers.wordpress.entrypoints=web"
+            - "traefik.http.services.wordpress.loadbalancer.server.port=80"
+            - "traefik.http.services.wordpress.loadbalancer.server.scheme=http"
+        networks:
+            - demo-network
+        depends_on:
+            - mariadb
+            - mailhog
+
+    mariadb:
+        image: 'mariadb:10'
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: 'root'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: 'payment'
+            MYSQL_USER: 'MYSQL_USER'
+            MYSQL_PASSWORD: 'root'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - 'demo-mariadb:/var/lib/mysql'
+            - './etc/mariadb/create-wordpress-database.sh:/docker-entrypoint-initdb.d/10-create-wordpress-database.sh'
+            - './data:/data'
+        networks:
+            - demo-network
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-proot"]
+            retries: 3
+            timeout: 5s
+            
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - 1025:1025
+            - 8025:8025
+        networks:
+            - demo-network
+
+networks:
+    demo-network:
+        driver: bridge
+
+volumes:
+    demo-mariadb:
+        driver: local

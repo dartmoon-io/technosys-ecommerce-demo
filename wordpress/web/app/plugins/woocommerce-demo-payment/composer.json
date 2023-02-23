@@ -1,0 +1,21 @@
+{
+    "name": "dartmoon/woocommerce-demo-payment",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Dartmoon\\WooCommerceDemoPayment\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dartmoon",
+            "email": "hello@dartmoon.io"
+        }
+    ],
+    "require-dev": {
+        "symfony/var-dumper": "^5.4"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
