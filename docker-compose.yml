@@ -61,6 +61,7 @@ services:
             - "traefik.http.routers.payment.entrypoints=web"
             - "traefik.http.services.payment.loadbalancer.server.port=80"
             - "traefik.http.services.payment.loadbalancer.server.scheme=http"
+        restart: always
         networks:
             - demo-network
         depends_on:
@@ -99,6 +100,7 @@ services:
             - "traefik.http.routers.wordpress.entrypoints=web"
             - "traefik.http.services.wordpress.loadbalancer.server.port=80"
             - "traefik.http.services.wordpress.loadbalancer.server.scheme=http"
+        restart: always
         networks:
             - demo-network
         depends_on:
@@ -119,7 +121,9 @@ services:
         volumes:
             - 'demo-mariadb:/var/lib/mysql'
             - './etc/mariadb/create-wordpress-database.sh:/docker-entrypoint-initdb.d/10-create-wordpress-database.sh'
-            - './data:/data'
+            - './data/payment.sql:/data/payment.sql'
+            - './data/wordpress.sql:/data/wordpress.sql'
+        restart: always
         networks:
             - demo-network
         healthcheck:
@@ -149,6 +153,7 @@ services:
             - 53:53/tcp
             - 53:53/udp
             - 953:953
+        restart: always
         networks:
             - demo-network
 
