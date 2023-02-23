@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '8a63a362c43fff78a46d6d4ea41bfd4e757efc7d',
+        'reference' => '9746fd88ecd20111666221a3577b4ca87d327baf',
         'name' => 'roots/bedrock',
         'dev' => true,
     ),
@@ -67,7 +67,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '8a63a362c43fff78a46d6d4ea41bfd4e757efc7d',
+            'reference' => '9746fd88ecd20111666221a3577b4ca87d327baf',
             'dev_requirement' => false,
         ),
         'roots/bedrock-autoloader' => array(
@@ -191,6 +191,15 @@
             'install_path' => __DIR__ . '/../../web/app/plugins/woocommerce',
             'aliases' => array(),
             'reference' => 'tags/7.4.0',
+            'dev_requirement' => false,
+        ),
+        'wpackagist-plugin/wp-mail-smtp' => array(
+            'pretty_version' => '3.7.0',
+            'version' => '3.7.0.0',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../web/app/plugins/wp-mail-smtp',
+            'aliases' => array(),
+            'reference' => 'tags/3.7.0',
             'dev_requirement' => false,
         ),
         'wpackagist-theme/twentytwentythree' => array(

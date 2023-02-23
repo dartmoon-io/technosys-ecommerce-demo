@@ -135,6 +135,23 @@ services:
         networks:
             - demo-network
 
+    dns:
+        build:
+            context: ./etc/bind9
+            dockerfile: Dockerfile
+        image: tecnosys-ecommerce-demo/bind9
+        volumes:
+            - './etc/bind9/named.conf.options:/etc/bind/named.conf.options'
+            - './etc/bind9/named.conf.test:/etc/bind/named.conf.test'
+            - './etc/bind9/db.demo-payment.test:/etc/bind/zones/db.demo-payment.test'
+            - './etc/bind9/db.ecommerce.test:/etc/bind/zones/db.ecommerce.test'
+        ports:
+            - 53:53/tcp
+            - 53:53/udp
+            - 953:953
+        networks:
+            - demo-network
+
 networks:
     demo-network:
         driver: bridge

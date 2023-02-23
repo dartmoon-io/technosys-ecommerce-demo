@@ -1,0 +1,9 @@
+zone "ecommerce.test" IN {
+    type master;
+    file "/etc/bind/zones/db.ecommerce.test";
+};
+
+zone "demo-payment.test" IN {
+    type master;
+    file "/etc/bind/zones/db.demo-payment.test";
+};
