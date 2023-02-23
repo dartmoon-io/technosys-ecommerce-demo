@@ -119,6 +119,7 @@ services:
         volumes:
             - 'demo-mariadb:/var/lib/mysql'
             - './etc/mariadb/create-wordpress-database.sh:/docker-entrypoint-initdb.d/10-create-wordpress-database.sh'
+            - './data:/data'
         networks:
             - demo-network
         healthcheck:
