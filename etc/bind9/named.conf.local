@@ -1,0 +1,9 @@
+zone "ecommerce.local" {
+    type master;
+    file "/etc/bind/zones/db.ecommerce.local";
+};
+
+zone "demo-payment.local" {
+    type master;
+    file "/etc/bind/zones/db.demo-payment.local";
+};

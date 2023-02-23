@@ -35,7 +35,7 @@ services:
             APP_ENV: "local"
             APP_KEY: "base64:dbUhjrzYSv1dddeTu10IbaJCIQx3o4r1q6uCdXsHeio: "
             APP_DEBUG: "true"
-            APP_URL: "http://demo-payment.test"
+            APP_URL: "http://demo-payment.local"
             LOG_CHANNEL: "stack"
             LOG_DEPRECATIONS_CHANNEL: "null"
             LOG_LEVEL: "debug"
@@ -51,13 +51,13 @@ services:
             MAIL_USERNAME: "null"
             MAIL_PASSWORD: "null"
             MAIL_ENCRYPTION: "null"
-            MAIL_FROM_ADDRESS: "hello@demo-payment.test"
+            MAIL_FROM_ADDRESS: "hello@demo-payment.local"
             MAIL_FROM_NAME: "Demo Payment System"
         volumes:
             - './payment:/var/www/html'
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.payment.rule=Host(`demo-payment.test`)"
+            - "traefik.http.routers.payment.rule=Host(`demo-payment.local`)"
             - "traefik.http.routers.payment.entrypoints=web"
             - "traefik.http.services.payment.loadbalancer.server.port=80"
             - "traefik.http.services.payment.loadbalancer.server.scheme=http"
@@ -81,8 +81,8 @@ services:
             DB_USER: "root"
             DB_PASSWORD: "root"
             WP_ENV: "development"
-            WP_HOME: "http://ecommerce.test"
-            WP_SITEURL: "http://ecommerce.test/wp"
+            WP_HOME: "http://ecommerce.local"
+            WP_SITEURL: "http://ecommerce.local/wp"
             AUTH_KEY: "PjQ(q%h%sM?@5<efV>[Zt*&L,F]M9u`!@+cHk%m2PaL!Oded8H@unq)5etr&8>]r"
             SECURE_AUTH_KEY: "q;V5t$$^Grn_p<d_Des=(hi7PZGC,acro&XJ9a4:hvh(P8U^ncR*|>zlO_#bF[u;%"
             LOGGED_IN_KEY: ",Y6(7u&,^^hjJD2rR}Z>y&?i4Z?T:|ymFEDe$$xl3h3gBAEz92Om?up|TT8+y7ikT"
@@ -95,7 +95,7 @@ services:
             - './wordpress:/var/www/html'
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.wordpress.rule=Host(`ecommerce.test`)"
+            - "traefik.http.routers.wordpress.rule=Host(`ecommerce.local`)"
             - "traefik.http.routers.wordpress.entrypoints=web"
             - "traefik.http.services.wordpress.loadbalancer.server.port=80"
             - "traefik.http.services.wordpress.loadbalancer.server.scheme=http"
@@ -132,6 +132,22 @@ services:
         ports:
             - 1025:1025
             - 8025:8025
+        networks:
+            - demo-network
+
+    dns:
+        build:
+            context: ./etc/bind9
+            dockerfile: Dockerfile
+        image: tecnosys-ecommerce-demo/bind9
+        volumes:
+            - './etc/bind9/named.conf.options:/etc/bind/named.conf.options'
+            - './etc/bind9/named.conf.local:/etc/bind/named.conf.local'
+            - './etc/bind9/db.demo-payment.local:/etc/bind/zones/db.demo-payment.local'
+            - './etc/bind9/db.ecommerce.local:/etc/bind/zones/db.ecommerce.local'
+        ports:
+            - 53:53
+            - 953:953
         networks:
             - demo-network
 
