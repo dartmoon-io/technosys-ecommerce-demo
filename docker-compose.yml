@@ -146,7 +146,7 @@ services:
         image: tecnosys-ecommerce-demo/bind9
         volumes:
             - './etc/bind9/named.conf.options:/etc/bind/named.conf.options'
-            - './etc/bind9/named.conf.test:/etc/bind/named.conf.test'
+            - './etc/bind9/named.conf.local:/etc/bind/named.conf.local'
             - './etc/bind9/db.demo-payment.test:/etc/bind/zones/db.demo-payment.test'
             - './etc/bind9/db.ecommerce.test:/etc/bind/zones/db.ecommerce.test'
         ports:
