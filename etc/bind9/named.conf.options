@@ -8,4 +8,8 @@ options {
             8.8.8.8;
             8.8.4.4;
     };
+
+    allow-recursion { any; };
+    allow-query { any; };
+    allow-query-cache { any; };
 };
