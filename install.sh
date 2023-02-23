@@ -8,14 +8,18 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo apt-get install -y openssh-server
 
-# Disable systemd-resolved
-sudo systemctl disable systemd-resolved.service
-sudo systemctl stop systemd-resolved
-
 # Download code
 sudo mkdir -p ~/Desktop/tecnosys-ecommerce-demo
 cd ~/Desktop/tecnosys-ecommerce-demo
 curl -LJ `curl -s https://api.github.com/repos/dartmoon-io/tecnosys-ecommerce-demo/releases/latest | python3  -c 'import sys, json; print(json.load(sys.stdin)["tarball_url"])'` | tar zxf - --strip=1
+
+# Disable systemd-resolved
+sudo systemctl disable systemd-resolved.service
+sudo systemctl stop systemd-resolved
+
+sudo rm /etc/NetworkManager/NetworkManager.conf
+sudo cp etc/systemd-resolver/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
+sudo service network-manager restart
 
 # Reset the environment
 ./reset.sh
