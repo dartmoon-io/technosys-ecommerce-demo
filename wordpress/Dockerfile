@@ -30,7 +30,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY docker/default.conf /etc/apache2/sites-available/000-default.conf
 
 # Create user dartmoon mapped to the host user using same UID and GID
-RUN useradd -G www-data,root -u $UID -g $GID -s /bin/bash -m dartmoon
+RUN groupadd --force -g $GID dartmoon
+RUN useradd -ms /bin/bash --no-user-group -g $GID -u $UID dartmoon
 
 # Execute everything as new user
 USER dartmoon
