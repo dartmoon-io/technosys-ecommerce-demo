@@ -146,7 +146,8 @@ services:
             - './etc/bind9/db.demo-payment.local:/etc/bind/zones/db.demo-payment.local'
             - './etc/bind9/db.ecommerce.local:/etc/bind/zones/db.ecommerce.local'
         ports:
-            - 53:53
+            - 53:53/tcp
+            - 53:53/udp
             - 953:953
         networks:
             - demo-network

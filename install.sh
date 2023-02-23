@@ -8,6 +8,10 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo apt-get install -y openssh-server
 
+# Disable systemd-resolved
+sudo systemctl disable systemd-resolved.service
+sudo systemctl stop systemd-resolved
+
 # Download code
 sudo mkdir -p ~/Desktop/tecnosys-ecommerce-demo
 cd ~/Desktop/tecnosys-ecommerce-demo
