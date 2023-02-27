@@ -35,67 +35,67 @@ function translations_api( $type, $args = null ) {
 	 */
 	$res = apply_filters( 'translations_api', false, $type, $args );
 
-	if ( false === $res ) {
-		$url      = 'http://api.wordpress.org/translations/' . $type . '/1.0/';
-		$http_url = $url;
-		$ssl      = wp_http_supports( array( 'ssl' ) );
-		if ( $ssl ) {
-			$url = set_url_scheme( $url, 'https' );
-		}
+	// if ( false === $res ) {
+	// 	$url      = 'http://api.wordpress.org/translations/' . $type . '/1.0/';
+	// 	$http_url = $url;
+	// 	$ssl      = wp_http_supports( array( 'ssl' ) );
+	// 	if ( $ssl ) {
+	// 		$url = set_url_scheme( $url, 'https' );
+	// 	}
 
-		$options = array(
-			'timeout' => 3,
-			'body'    => array(
-				'wp_version' => $wp_version,
-				'locale'     => get_locale(),
-				'version'    => $args['version'], // Version of plugin, theme or core.
-			),
-		);
+	// 	$options = array(
+	// 		'timeout' => 3,
+	// 		'body'    => array(
+	// 			'wp_version' => $wp_version,
+	// 			'locale'     => get_locale(),
+	// 			'version'    => $args['version'], // Version of plugin, theme or core.
+	// 		),
+	// 	);
 
-		if ( 'core' !== $type ) {
-			$options['body']['slug'] = $args['slug']; // Plugin or theme slug.
-		}
+	// 	if ( 'core' !== $type ) {
+	// 		$options['body']['slug'] = $args['slug']; // Plugin or theme slug.
+	// 	}
 
-		$request = wp_remote_post( $url, $options );
+	// 	$request = wp_remote_post( $url, $options );
 
-		if ( $ssl && is_wp_error( $request ) ) {
-			trigger_error(
-				sprintf(
-					/* translators: %s: Support forums URL. */
-					__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
-					__( 'https://wordpress.org/support/forums/' )
-				) . ' ' . __( '(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)' ),
-				headers_sent() || WP_DEBUG ? E_USER_WARNING : E_USER_NOTICE
-			);
+	// 	if ( $ssl && is_wp_error( $request ) ) {
+	// 		trigger_error(
+	// 			sprintf(
+	// 				/* translators: %s: Support forums URL. */
+	// 				__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+	// 				__( 'https://wordpress.org/support/forums/' )
+	// 			) . ' ' . __( '(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)' ),
+	// 			headers_sent() || WP_DEBUG ? E_USER_WARNING : E_USER_NOTICE
+	// 		);
 
-			$request = wp_remote_post( $http_url, $options );
-		}
+	// 		$request = wp_remote_post( $http_url, $options );
+	// 	}
 
-		if ( is_wp_error( $request ) ) {
-			$res = new WP_Error(
-				'translations_api_failed',
-				sprintf(
-					/* translators: %s: Support forums URL. */
-					__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
-					__( 'https://wordpress.org/support/forums/' )
-				),
-				$request->get_error_message()
-			);
-		} else {
-			$res = json_decode( wp_remote_retrieve_body( $request ), true );
-			if ( ! is_object( $res ) && ! is_array( $res ) ) {
-				$res = new WP_Error(
-					'translations_api_failed',
-					sprintf(
-						/* translators: %s: Support forums URL. */
-						__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
-						__( 'https://wordpress.org/support/forums/' )
-					),
-					wp_remote_retrieve_body( $request )
-				);
-			}
-		}
-	}
+	// 	if ( is_wp_error( $request ) ) {
+	// 		$res = new WP_Error(
+	// 			'translations_api_failed',
+	// 			sprintf(
+	// 				/* translators: %s: Support forums URL. */
+	// 				__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+	// 				__( 'https://wordpress.org/support/forums/' )
+	// 			),
+	// 			$request->get_error_message()
+	// 		);
+	// 	} else {
+	// 		$res = json_decode( wp_remote_retrieve_body( $request ), true );
+	// 		if ( ! is_object( $res ) && ! is_array( $res ) ) {
+	// 			$res = new WP_Error(
+	// 				'translations_api_failed',
+	// 				sprintf(
+	// 					/* translators: %s: Support forums URL. */
+	// 					__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+	// 					__( 'https://wordpress.org/support/forums/' )
+	// 				),
+	// 				wp_remote_retrieve_body( $request )
+	// 			);
+	// 		}
+	// 	}
+	// }
 
 	/**
 	 * Filters the Translation Installation API response results.
