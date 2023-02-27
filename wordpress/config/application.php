@@ -108,6 +108,7 @@ Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 /**
  * Debugging Settings
  */
+Config::define('WP_HTTP_BLOCK_EXTERNAL', true);
 Config::define('WP_DEBUG_DISPLAY', false);
 Config::define('WP_DEBUG_LOG', false);
 Config::define('SCRIPT_DEBUG', false);
