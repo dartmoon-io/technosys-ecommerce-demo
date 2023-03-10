@@ -4,11 +4,6 @@ options {
     recursion yes;
     listen-on { any; };
 
-    forwarders {
-            8.8.8.8;
-            8.8.4.4;
-    };
-
     allow-recursion { any; };
     allow-query { any; };
     allow-query-cache { any; };

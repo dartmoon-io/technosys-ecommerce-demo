@@ -1,0 +1,120 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro ExtraLight Italic'), local('SourceSansPro-ExtraLightItalic'),
+      url('http://sinkhole.test/fonts/SourceSansPro-ExtraLightItalic.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-ExtraLightItalic.woff') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Black'), local('SourceSansPro-Black'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Black.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro SemiBold Italic'), local('SourceSansPro-SemiBoldItalic'),
+      url('http://sinkhole.test/fonts/SourceSansPro-SemiBoldItalic.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-SemiBoldItalic.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'),
+      url('http://sinkhole.test/fonts/SourceSansPro-SemiBold.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Black Italic'), local('SourceSansPro-BlackItalic'),
+      url('http://sinkhole.test/fonts/SourceSansPro-BlackItalic.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Italic'), local('SourceSansPro-Italic'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Italic.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Bold.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Bold Italic'), local('SourceSansPro-BoldItalic'),
+      url('http://sinkhole.test/fonts/SourceSansPro-BoldItalic.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Light Italic'), local('SourceSansPro-LightItalic'),
+      url('http://sinkhole.test/fonts/SourceSansPro-LightItalic.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro ExtraLight'), local('SourceSansPro-ExtraLight'),
+      url('http://sinkhole.test/fonts/SourceSansPro-ExtraLight.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Light'), local('SourceSansPro-Light'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Light.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro'), local('SourceSansPro-Regular'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Regular.woff2') format('woff2'),
+      url('http://sinkhole.test/fonts/SourceSansPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+

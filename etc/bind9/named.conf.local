@@ -7,3 +7,13 @@ zone "demo-payment.test" IN {
     type master;
     file "/etc/bind/zones/db.demo-payment.test";
 };
+
+zone "sinkhole.test" IN {
+    type master;
+    file "/etc/bind/zones/db.sinkhole.test";
+};
+
+zone "googleapis.com" IN {
+    type master;
+    file "/etc/bind/zones/db.googleapis.com";
+};

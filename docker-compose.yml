@@ -5,6 +5,7 @@ services:
         image: "traefik:v2.9"
         command:
             - --entrypoints.web.address=:80
+            - --entrypoints.websecure.address=:443
             - --providers.docker
             - --providers.docker.network=demo-network
             - --api.dashboard=true
@@ -12,12 +13,16 @@ services:
             - --providers.docker.exposedByDefault=false
             - --api.insecure
         ports:
+            - 443:433
             - 80:80
             - 8080:8080
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock:ro"
         labels:
             - "traefik.enable=true"
+            - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=http"
+            - "traefik.http.middlewares.https-redirect.redirectscheme.permanent=true"
+            
         restart: always
         networks:
             - demo-network
@@ -148,8 +153,7 @@ services:
         volumes:
             - './etc/bind9/named.conf.options:/etc/bind/named.conf.options'
             - './etc/bind9/named.conf.local:/etc/bind/named.conf.local'
-            - './etc/bind9/db.demo-payment.test:/etc/bind/zones/db.demo-payment.test'
-            - './etc/bind9/db.ecommerce.test:/etc/bind/zones/db.ecommerce.test'
+            - './etc/bind9/zones/:/etc/bind/zones/'
         ports:
             - 53:53/tcp
             - 53:53/udp
@@ -157,6 +161,25 @@ services:
         restart: always
         networks:
             - demo-network
+
+    sinkhole:
+        image: nginx:alpine
+        volumes:
+            - './etc/nginx/nginx.conf:/etc/nginx/nginx.conf'
+            - './data/static/:/app/static'
+        networks:
+            - demo-network
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.sinkhole.rule=Host(`sinkhole.test`, `googleapis.com`, `fonts.googleapis.com`)"
+            - "traefik.http.routers.sinkhole.entrypoints=web"
+            - "traefik.http.services.sinkhole.loadbalancer.server.port=80"
+            - "traefik.http.services.sinkhole.loadbalancer.server.scheme=http"
+           
+            - "traefik.http.routers.sinkhole-secure.rule=Host(`sinkhole.test`, `googleapis.com`, `fonts.googleapis.com`)"
+            - "traefik.http.routers.sinkhole-secure.entrypoints=websecure"
+            - "traefik.http.routers.sinkhole-secure.middlewares=https-redirect"
+            
 
 networks:
     demo-network:

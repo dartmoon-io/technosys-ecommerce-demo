@@ -21,6 +21,7 @@ sudo systemctl stop systemd-resolved
 
 sudo rm /etc/NetworkManager/NetworkManager.conf
 sudo cp etc/systemd-resolver/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
+sudo rm /etc/resolv.conf
 sudo systemctl restart NetworkManager
 
 # Reset the environment
